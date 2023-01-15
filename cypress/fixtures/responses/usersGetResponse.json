@@ -1,0 +1,29 @@
+[
+  {
+      "id": "9b157424-90c0-462e-ae57-86e895248ed1",
+      "name": "Matelda",
+      "firstLastName": "Ivimey",
+      "secondLastName": "Yousef",
+      "CURP": "COEA791226MGRRVM07",
+      "RFC": "COEA791226D68",
+      "account": "374283589513936"
+  },
+  {
+      "id": "502ed528-6e0e-483c-aae9-59b273ef6bb7",
+      "name": "Shepard",
+      "firstLastName": "Kirkland",
+      "secondLastName": "Prahl",
+      "CURP": "IIVQ970211P28",
+      "RFC": "IIVQ970211MMNNLR06",
+      "account": "5434804060114097"
+  },
+  {
+      "id": "93bd4df2-6bc6-4db2-a4e4-f53ab90c7615",
+      "name": "Kippy",
+      "firstLastName": "Haylock",
+      "secondLastName": "Osgar",
+      "CURP": "DODI800731MCSLLD07",
+      "RFC": "DODI800731LH1",
+      "account": "6391083442041505"
+  }
+]

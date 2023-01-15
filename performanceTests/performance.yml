@@ -1,0 +1,25 @@
+config:
+  target: "https://6ee61bbd-8221-42bb-985e-3e14dd441c6a.mock.pstmn.io"
+  plugins:
+    expect: {}
+  phases:
+    - duration: 1
+      arrivalRate: 1
+      name: "Phase 1"
+  defaults:
+    headers:
+      Content-type: application/json
+scenarios:
+  - flow:
+    # getting all users
+    - get:
+        url: "/users"
+        expect:
+          - statusCode: 200
+          - contentType: json
+    # getting a balance for a specific account
+    - get:
+        url: "/balance/6391083442041505"
+        expect:
+          - statusCode: 200
+          - contentType: json
