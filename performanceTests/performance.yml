@@ -3,8 +3,10 @@ config:
   plugins:
     expect: {}
   phases:
-    - duration: 1
-      arrivalRate: 1
+      # the time that the phase will last, in seconds
+    - duration: 10
+      # number of petitions per second during the defined duration
+      arrivalRate: 10
       name: "Phase 1"
   defaults:
     headers:

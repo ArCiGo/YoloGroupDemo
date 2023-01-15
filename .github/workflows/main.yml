@@ -18,9 +18,10 @@ jobs:
           start: npm run cypress:open:cli
   artillery:
     runs-on: ubuntu-latest
-    container: artilleryio/artillery:latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Execute performance tests
-        run: /home/node/artillery/bin/artillery run performanceTests/performance.yml
+        uses: artilleryio/artillery:latest
+        with:
+          filepath: performanceTests/performance.yml
