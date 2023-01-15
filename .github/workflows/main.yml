@@ -19,9 +19,8 @@ jobs:
   artillery:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: Execute performance tests
-        uses: artilleryio/artillery:latest
-        with:
-          filepath: performanceTests/performance.yml
+    - uses: actions/checkout@master
+    - name: Performance tests
+      uses: kenju/github-actions-artillery@master
+      with:
+        filepath: performanceTests/performance.yml
