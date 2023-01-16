@@ -1,5 +1,5 @@
 config:
-  target: "<mockServerURL>"
+  target: "{{ $processEnvironment.BASE_URL_TARGET }}"
   plugins:
     expect: {}
   phases:

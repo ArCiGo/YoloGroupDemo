@@ -1,4 +1,8 @@
 describe('ExBanking mock server API tests', () => {
+
+    beforeEach(() => {
+        cy.visit(Cypress.env('baseURL'));
+    });
     
     // TC1
     it('should post a user successfully', () => {

@@ -7,7 +7,7 @@
     "cypress:open": "cypress open",
     "cypress:open:cli": "cypress run --spec cypress/e2e",
     "html-report": "cypress run --spec cypress/e2e --browser chrome --headed",
-    "artillery:test": "artillery run --output performanceResults/report.json performanceTests/performance.yml && artillery report --output performanceResults/report.html performanceResults/report.json"
+    "artillery:test": "dotenv -- artillery run --output performanceResults/report.json performanceTests/performance.yml && artillery report --output performanceResults/report.html performanceResults/report.json"
   },
   "author": "",
   "license": "ISC",
@@ -16,5 +16,8 @@
     "cypress": "^10.3.1",
     "cypress-mochawesome-reporter": "^3.2.0",
     "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "dotenv-cli": "^6.0.0"
   }
 }

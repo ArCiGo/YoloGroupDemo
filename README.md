@@ -73,20 +73,17 @@ Open your favorite terminal (or you can use the terminal provided by Visual Stud
 > npm i
 ```
 
-3. Open Postman and import the collection script (`ExBanking.postman_collection.json`) located in the `postman` folder.
+3. Open Postman and import the collection script (`ExBanking.postman_collection.json`) located in the `postman` folder (click on image to see the video).
 
-https://user-images.githubusercontent.com/32103862/212745565-d80f540b-cb12-4bde-a0e5-10a4b9811c9c.mp4
-<br>
+[![Import Postman collection](/Img01_Postman.png)](https://user-images.githubusercontent.com/32103862/212745565-d80f540b-cb12-4bde-a0e5-10a4b9811c9c.mp4)
 
-4. Now import the environment (`ExBanking.postman_environment.json`) located in the `postman` folder.
+4. Now import the environment (`ExBanking.postman_environment.json`) located in the `postman` folder (click on image to see the video).
 
-https://user-images.githubusercontent.com/32103862/212745567-2ce1091e-dcda-478a-987f-ec3ccf354a7f.mp4
-<br>
+[![Import environment collection](/Img02_Postman.png)](https://user-images.githubusercontent.com/32103862/212745567-2ce1091e-dcda-478a-987f-ec3ccf354a7f.mp4).
 
-5. Now it is time to create a mock server to run everything. Just remember to use the existing collection you already imported. Once the mock server is created, copy the URL and paste it in the URL variable located in the ExBanking environment (do a double check to verify if the URL is correct). Now, you are able to execute the scripts in Postman!
+5. Now it is time to create a mock server to run everything. Just remember to use the existing collection you already imported. Once the mock server is created, copy the URL and paste it in the URL variable located in the ExBanking environment (do a double check to verify if the URL is correct). Now, you are able to execute the scripts in Postman! (click on image to see the video).
 
-https://user-images.githubusercontent.com/32103862/212745560-1a4317d6-0698-46d6-b287-ea570f88778c.mp4
-<br>
+[![Create mock server](/Img03_Postman.png)](https://user-images.githubusercontent.com/32103862/212745560-1a4317d6-0698-46d6-b287-ea570f88778c.mp4).
 
 6. Replace the `baseUrl` value, located in the `cypress.config.ts` file (at root level of the project) with the URL of the mock server. Perform the same action for the `target` value located in the `performance.yml` file (`performanceTests` folder) with the URL of the mock server.
 
