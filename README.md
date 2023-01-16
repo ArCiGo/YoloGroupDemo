@@ -1,16 +1,20 @@
-# Automation Framework made with TS + Cypress
+# Yolo Group Demo assessment
+
+A technical assessment for the **Software Engineer in Test** position.
 
 ## The project 💻
 
-A *Cypress* template to create new automation framework projects!
+The following project was made using **TS, Cypress, Artillery, Postman**. Review [here](ExBanking_for_test_assignment_(1).pdf) the assessment proposed. Here is the [test plan](TestCases.md)!
 
-**Before you continue reading:** *You can check in this repository a couple of samples made with [TS](https://github.com/ArCiGo/TS-Playwright-Automation-Framework/tree/AutomationFrameworkSample_TS) and [JS](https://github.com/ArCiGo/TS-Automation-Framework/tree/AutomationFrameworkSample_JS)*
+Do you want to create a UI framework based on this project? Check this [branch](https://github.com/ArCiGo/TS-Automation-Framework/tree/master)!
 
 ## Tools ⚙️
 
+* *TypeScript v4.7.4*.
+* *Artillery v2.0.0-27*.
 * *Cypress v10.3.1*.
 * *cypress-mochawesome-reporter v3.2.0*.
-* *TypeScript v4.7.4*.
+* *Postman v10.7.3*.
 * *GitHub Actions*.
 * *Docker*.
 
@@ -23,61 +27,90 @@ A *Cypress* template to create new automation framework projects!
 │       └── main.yml
 ├── cypress/
 │   ├── e2e/
-│   │   ├── spec.cy.ts
+│   │   └── api.mockServer.spec.cy.ts
 │   ├── fixtures/
-│   │   └── fixture.json
+│   │   ├── requests/
+│   │   │   ├── depositsPostRequest.json
+│   │   │   ├── transfersPostRequest.json
+│   │   │   ├── usersPostRequest.json
+│   │   │   └── withdrawalsPostRequest.json
+│   │   └── responses/
+│   │       ├── balanceGetResponse.json
+│   │       ├── depositsPostResponse.json
+│   │       ├── existingUserPostResponse.json
+│   │       ├── transfersPostResponse.json
+│   │       ├── usersGetResponse.json
+│   │       ├── usersPostResponse.json
+│   │       └── withdrawalsPostResponse.json
 │   ├── support/
 │   │   ├── commands.ts
 │   │   ├── e2e.ts
 │   │   └── index.ts
 │   └── tsconfig.json
-├── cypress.config.ts
-├── cypress.env.json
-├── Dockerfile
-└── package.json
+├── performanceResults
+└── performanceTests/
+    └── performance.yml
 ```
 
 ## Setup 🛠️
 
-The following steps can be executed using a terminal (I use [hyper](https://hyper.is/)), or using the terminal provided by VS Code.
+## Installing the node modules
+
+Open your favorite terminal (or you can use the terminal provided by Visual Studio Code)
 
 1. Clone the repo on your computer at any path you want.-
 
 ```bash
-> git clone https://github.com/ArCiGo/JS-Automation-Framework.git
+> git clone https://github.com/ArCiGo/YoloGroupDemo
 
 > git checkout master
 ```
 
 2. In the path you cloned the repo, open the project folder and install the packages.-
 ```bash
-> cd JS-Automation-Framework
+> cd YoloGroupDemo
 
 > npm i
 ```
 
-3. Delete the folders, files or branches you don't need.
+3. Open Postman and import the collection script (`ExBanking.postman_collection.json`) located in the `postman` folder.
 
-4. **Optional:** In this project you'll find a cypress.env.json file that is empty. You can use it to define your environmental variables.
+<div style="position: relative; padding-bottom: 64.98194945848375%; height: 0;"><iframe src="https://www.loom.com/embed/54ab7abdd6ce47678141d12937412e62" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+<br>
 
-## Run the tests ⚡
+4. Now import the environment (`ExBanking.postman_environment.json`) located in the `postman` folder.
+
+<div style="position: relative; padding-bottom: 64.98194945848375%; height: 0;"><iframe src="https://www.loom.com/embed/4cfe7576e63e46098134f3238e612e17" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+<br>
+
+5. Now it is time to create a mock server to run everything. Just remember to use the existing collection you already imported. Once the mock server is created, copy the URL and paste it in the URL variable located in the ExBanking environment (do a double check to verify if the URL is correct). Now, you are able to execute the scripts in Postman!
+
+<div style="position: relative; padding-bottom: 64.98194945848375%; height: 0;"><iframe src="https://www.loom.com/embed/5a0de7fbef0c484cb40ed7650991d872" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+<br>
+
+6. Replace the `baseUrl` value, located in the `cypress.config.ts` file (at root level) with the URL of the mock server. Perform the same action for the `target` value located in the `performance.yml` file (`performanceTests` folder) with the URL of the mock server.
+
+## Running the tests ⚡
 ```bash
 # If you don't want to open the Cypress GUI, you can execute the following commands:
 > npm run cypress:open:cli
 # or
 > npm run html-report
 
+When you run the tests, a new folder is generated inside the `cypress` folder (`reports`). This folder contains the report for the executed tests. If a test fails, the report will include a screenshot to see what the failure was.
+
 # If you want to open the GUI:
 > npm run cypress:open
 ```
 
-When you run the tests, a new folder is generated inside the `cypress` folder (`reports`). This folder contains the report for the executed tests. If a test fails, the report will include a screenshot to see what the failure was.
-
-![UI Report Sample 1](./Image01.png)
+```bash
+# To execute the Artillery tests, run the following command:
+> npm run artillery:test
+```
 
 ## Docker 🐋
 
-If you want to execute the tests using Docker, you can do the following in your terminal at the workspace project.-
+If you want to execute the Cypress tests using Docker, you can do the following in your terminal at the workspace project.-
 
 ```bash
 # Without a Dockerfile
@@ -102,8 +135,7 @@ If you want to execute the tests using Docker, you can do the following in your 
 > docker run -i -v $(pwd):/my-cypress-project -t my-cypress-image:<YourVersionTag> --spec cypress/e2e
 ```
 
-You can check in this repository a couple of samples made with [JS](https://github.com/ArCiGo/JS-Automation-Framework/tree/AutomationFrameworkSample_JS) and [TS](https://github.com/ArCiGo/JS-Automation-Framework/tree/AutomationFrameworkSample_TS).
+## To consider 👀
 
-## Collaborations 👨‍🏭
-
-Do you want to collaborate or contribute in this project? No problem! I'm open to improvements, comments and suggestions. Just do a PR with your suggestions and we can discuss them 😀
+* As the assessment says, this project uses a mock server. Once the Development team develops the **ExBanking** services, and is ready to use, the tests will be updated with the right URL and endpoints. If needed the requests and responses might be updated.
+* Postman has a limitation with the Mock Servers feature. For a free user there is a limit of 1,000 calls per month. For the rest of the users (pay), 10,000 calls per month. Take this into consideration at the moment of running the tests.

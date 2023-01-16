@@ -1,0 +1,111 @@
+{
+  "aggregate": {
+    "counters": {
+      "vusers.created_by_name.0": 100,
+      "vusers.created": 100,
+      "http.requests": 100,
+      "http.codes.429": 100,
+      "http.responses": 100,
+      "plugins.expect.failed": 100,
+      "plugins.expect.failed.statusCode": 100,
+      "plugins.expect.ok": 100,
+      "plugins.expect.ok.contentType": 100,
+      "errors.Failed expectations for request https://6ee61bbd-8221-42bb-985e-3e14dd441c6a.mock.pstmn.io/users": 100,
+      "vusers.failed": 100
+    },
+    "rates": {
+      "http.request_rate": 5
+    },
+    "firstCounterAt": 1673822930096,
+    "firstHistogramAt": 1673822930560,
+    "lastCounterAt": 1673822940479,
+    "lastHistogramAt": 1673822940478,
+    "firstMetricAt": 1673822930096,
+    "lastMetricAt": 1673822940479,
+    "period": 1673822940000,
+    "summaries": {
+      "http.response_time": {
+        "min": 137,
+        "max": 524,
+        "count": 100,
+        "p50": 153,
+        "median": 153,
+        "p75": 186.8,
+        "p90": 308,
+        "p95": 415.8,
+        "p99": 518.1,
+        "p999": 518.1
+      }
+    },
+    "histograms": {
+      "http.response_time": {
+        "min": 137,
+        "max": 524,
+        "count": 100,
+        "p50": 153,
+        "median": 153,
+        "p75": 186.8,
+        "p90": 308,
+        "p95": 415.8,
+        "p99": 518.1,
+        "p999": 518.1
+      }
+    }
+  },
+  "intermediate": [
+    {
+      "counters": {
+        "vusers.created_by_name.0": 99,
+        "vusers.created": 99,
+        "http.requests": 99,
+        "http.codes.429": 92,
+        "http.responses": 92,
+        "plugins.expect.failed": 92,
+        "plugins.expect.failed.statusCode": 92,
+        "plugins.expect.ok": 92,
+        "plugins.expect.ok.contentType": 92,
+        "errors.Failed expectations for request https://6ee61bbd-8221-42bb-985e-3e14dd441c6a.mock.pstmn.io/users": 92,
+        "vusers.failed": 92
+      },
+      "rates": {
+        "http.request_rate": 10
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1673822930096,
+      "firstHistogramAt": 1673822930560,
+      "lastCounterAt": 1673822939985,
+      "lastHistogramAt": 1673822939985,
+      "firstMetricAt": 1673822930096,
+      "lastMetricAt": 1673822939985,
+      "period": "1673822930000",
+      "summaries": {
+        "http.response_time": {
+          "min": 137,
+          "max": 524,
+          "count": 92,
+          "p50": 153,
+          "median": 153,
+          "p75": 172.5,
+          "p90": 232.8,
+          "p95": 308,
+          "p99": 518.1,
+          "p999": 518.1
+        }
+      },
+      "histograms": {
+        "http.response_time": {
+          "min": 137,
+          "max": 524,
+          "count": 92,
+          "p50": 153,
+          "median": 153,
+          "p75": 172.5,
+          "p90": 232.8,
+          "p95": 308,
+          "p99": 518.1,
+          "p999": 518.1
+        }
+      }
+    }
+  ]
+}
