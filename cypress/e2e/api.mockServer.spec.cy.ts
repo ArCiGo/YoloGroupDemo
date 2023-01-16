@@ -1,5 +1,6 @@
 describe('ExBanking mock server API tests', () => {
     
+    // TC1
     it('should post a user successfully', () => {
         cy.fixture('requests/usersPostRequest').then((bodyRequest) => {
             cy.request('POST', '/users', { bodyRequest }).then((response) => {
@@ -21,6 +22,7 @@ describe('ExBanking mock server API tests', () => {
         });
     });
 
+    // TC2
     it('should not post an existing user', () => {
         cy.fixture('requests/usersPostRequest').then((bodyRequest) => {
             cy.request({
@@ -37,7 +39,8 @@ describe('ExBanking mock server API tests', () => {
         });
     });
 
-    it('should get all the users registered in the app', () => {
+    // TC3
+    it('should get all the users registered in the service', () => {
         cy.request('GET', '/users').then((response) => {
             expect(response.isOkStatusCode).to.be.true;
             expect(response.status).to.be.eq(200);
@@ -45,7 +48,8 @@ describe('ExBanking mock server API tests', () => {
         });
     });
 
-    it('should get a specific user registered in the app', () => {
+    // TC4
+    it('should get a specific user registered in the service', () => {
         cy.request('GET', '/users/' + this.CURP).then((response) => {
             expect(response.isOkStatusCode).to.be.true;
             expect(response.status).to.be.eq(200);
@@ -55,6 +59,7 @@ describe('ExBanking mock server API tests', () => {
         });
     });
 
+    // TC6
     it('should deposit money successfully to an existing account', () => {
         cy.fixture('requests/depositsPostRequest').then((bodyRequest) => {
             cy.request('POST', '/deposits', { bodyRequest }).then((response) => {
@@ -65,6 +70,7 @@ describe('ExBanking mock server API tests', () => {
         });
     });
 
+    // TC8
     it('should withdraw money successfully from an existing account', () => {
         cy.fixture('requests/withdrawalsPostRequest').then((bodyRequest) => {
             cy.request('POST', '/withdrawals', { bodyRequest }).then((response) => {
@@ -75,6 +81,7 @@ describe('ExBanking mock server API tests', () => {
         });
     });
 
+    // TC10
     it('should get a balance of an existing account', () => {
         cy.request('GET', '/balance/' + this.account).then((response) => {
             expect(response.isOkStatusCode).to.be.true;
@@ -83,6 +90,7 @@ describe('ExBanking mock server API tests', () => {
         });
     });
 
+    // TC12
     it('should transfer money successfully to an existing account', () => {
         cy.fixture('requests/transfersPostRequest').then((bodyRequest) => {
             cy.request('POST', '/transfers', { bodyRequest }).then((response) => {

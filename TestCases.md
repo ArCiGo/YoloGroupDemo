@@ -143,5 +143,171 @@ Some functional and non-functional test cases for Yolo Group assessment.
     </tbody>
 </table>
 
-
 ## Test scenarios 💻
+
+Functional testing
+
+```gherkin
+Feature: ExBanking API demo flow
+
+# TC1. As a tester I should be able to create a user
+Scenario outline: Create a user
+    Given the following body request values "<name>", "<firstLastName>", "<secondLastName>", "<CURP>", "<RFC>" for the {{url}}/users endpoint (POST)
+    When I send it
+    Then I should get a successful body response with status code 200
+
+    Examples:
+    | name      | firstLastName | secondLastName    | CURP                  | RFC               |
+    | "Matelda" | "Ivimey"      | "Yousef"          | "COEA791226MGRRVM07"  | "COEA791226D68"   |
+
+# TC2. As a tester I should not be able to create a user that already exists
+Scenario outline: Attempt to create a user that already exists
+    Given the following body request values "<name>", "<firstLastName>", "<secondLastName>", "<CURP>", "<RFC>" for the {{url}}/users endpoint (POST)
+    When I send it
+    Then I should get a message telling me that the user already exists
+    And the status code should be 409
+
+    Examples:
+    | name      | firstLastName | secondLastName    | CURP                  | RFC               |
+    | "Matelda" | "Ivimey"      | "Yousef"          | "COEA791226MGRRVM07"  | "COEA791226D68"   |
+
+# TC3. As a tester I should be able to get all the users
+Scenario: Get all the users registered in ExBanking
+    Given the following {{url}}/users endpoint (GET)
+    When I send it
+    Then I should get all the users registered in ExBanking
+    And the status code should be 200
+
+# TC4. As a tester I should be able to get a specific user
+Scenario outline: Get an existing user by CURP
+    Given the following "<CURP>" param for the {{url}}/users/{{CURP}} endpoint (GET)
+    When I send it
+    Then I should get that user
+    And the status code should be 200
+
+    Examples:
+    | CURP                  |
+    | COEA791226MGRRVM07    |
+
+# TC5. The service should return a message if the user does not exist
+Scenario outline: Service should return a message if the user does not exist
+    Given the following "<CURP>" param for the {{url}}/users/{{CURP}} endpoint (GET)
+    When I send it
+    Then the service should return a message telling me that the user does not exist
+    And the status code should be 404
+
+    Examples:
+    | CURP                  |
+    | MUAE770826HHGNGD54    |
+
+# TC6. As a tester I should be able to perform a deposit to an existing account
+Scenario outline: Deposit money to an existing account
+    Given the following body request values "<account>" and "<ammount>" for the {{url}}/deposits endpoint (POST)
+    When I send it
+    Then I should get a successful body response with status code 200
+
+    Examples:
+    | account           | ammount   |
+    | 6391083442041505  | 560.00    |
+
+# TC7. As a tester I should not be able to perform a deposit if the account does not exist
+Scenario outline: Attempt to deposit money to a non-existing account
+    Given the following body request values "<account>" and "<ammount>" for the {{url}}/deposits endpoint (POST)
+    When I send it
+    Then the service should return a message telling me that the operation was not performed due to the account does not exist
+    And the status code should be 404
+
+    Examples:
+    | account           | ammount   |
+    | 7391063999991501  | 560.00    |
+
+# TC8. As a tester I should be able to withdraw money from any account
+Scenario outline: Withdraw money
+    Given the following body request values "<account>" and "<ammount>" for the {{url}}/withdrawals endpoint (POST)
+    When I send it
+    Then I should get a successful body response 
+    And the status code should be 200
+
+    Examples:
+    | account           | ammount   |
+    | 6391083442041505  | 30.45     |
+
+# TC9. As a tester I should not be able to withdraw money if the account does not have funds
+Scenario outline: Attempt to withdraw money from an account without funds
+    Given the following body request values "<account>" and "<ammount>", where the account does not have funds, for the {{url}}/withdrawals endpoint (POST)
+    When I send it
+    Then the service should return a message telling me that the operation was not performed due to the account does not have funds
+    And the status code should be 400
+
+    Examples:
+    | account           | ammount   |
+    | 5555583442033509  | 30.45     |
+
+# TC10. As a tester I should be able to get a balance from a specific account
+Scenario outline: Get balance from a specific account
+    Given the following "<account>" param for the {{url}}/balance/{{account}} endpoint (GET)
+    When I send it
+    Then I should be able to get the balance
+    And the status code should be 200
+
+    Examples:
+    | account           |
+    | 6391083442041505  |
+
+# TC11. As a tester I should not be able to get a balance if the account does not exist
+Scenario outline: Attempt to get balance from a non-existing account
+    Given the following "<account>" param for the {{url}}/balance/{{account}} endpoint (GET)
+    When I send it
+    Then the service should return a message telling me that account does not exist
+    And the status code should be 404
+
+    Examples:
+    | account           |
+    | 7323083332555501  |
+
+# TC12. As a tester I should be able to send money to an existing account
+Scenario outline: Send money to an existing account
+    Given the following body requests values "<account>", "<ammount>", "<destination>" and "<concept>" for the {{url}}/transfers endpoint (POST)
+    When I send it
+    Then I should get a successful body response
+    And the status code should be 200
+
+    Examples:
+    | account           | ammount   | destination       | concept                       |
+    | 6391083442041505  | 45.00     | 5434804060114097  | "Doing an amazing transfer!"  |
+
+# TC13. As a tester I should not be able to send money if the account does not exist
+Scenario outline: Attempt to send money to an non-existing account
+    Given the following body requests values "<account>", "<ammount>", "<destination>" and "<concept>", where the account does not exist, for the {{url}}/transfers endpoint (POST)
+    When I send it
+    Then the service should return a message telling me that account does not exist
+    And the status code should be 404
+
+    Examples:
+    | account           | ammount   | destination       | concept                       |
+    | 6391083442041505  | 45.00     | 5434804060114097  | "Doing an amazing transfer!"  |
+
+# TC14. As a tester I should not be able to send money if the ammount is less than or equal to $0.00
+Scenario outline: Attempt to send $0.00
+    Given the following body requests values "<account>", "<ammount>", "<destination>" and "<concept>", for the {{url}}/transfers endpoint (POST)
+    When I send it
+    Then the service should return a message telling me that the ammount should be greater than $0.00
+    And the status code should be 400
+
+    Examples:
+    | account           | ammount   | destination       | concept                       |
+    | 6391083442041505  | 0.00      | 5434804060114097  | "Doing an amazing transfer!"  |
+
+# TC14. As a tester I should not be able to send money if I do not have funds in the account
+Scenario outline: Attempt to send money using an account without funds
+    Given the following body requests values "<account>", "<ammount>", "<destination>" and "<concept>", for the {{url}}/transfers endpoint (POST)
+    When I send it
+    Then the service should return a message telling me that the account does not have funds
+    And the status code should be 400
+
+    Examples:
+    | account           | ammount   | destination       | concept                       |
+    | 5434804060114097  | 9000.00   | 374283589513936   | "Doing an amazing transfer!"  |
+```
+
+For demo purposes, the following functional test cases are going to be automated: **TC1, TC2, TC3, TC4, TC6, TC8, TC10, TC12**.
