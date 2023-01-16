@@ -88,7 +88,7 @@ Open your favorite terminal (or you can use the terminal provided by Visual Stud
 <div style="position: relative; padding-bottom: 64.98194945848375%; height: 0;"><iframe src="https://www.loom.com/embed/5a0de7fbef0c484cb40ed7650991d872" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 <br>
 
-6. Replace the `baseUrl` value, located in the `cypress.config.ts` file (at root level) with the URL of the mock server. Perform the same action for the `target` value located in the `performance.yml` file (`performanceTests` folder) with the URL of the mock server.
+6. Replace the `baseUrl` value, located in the `cypress.config.ts` file (at root level of the project) with the URL of the mock server. Perform the same action for the `target` value located in the `performance.yml` file (`performanceTests` folder) with the URL of the mock server.
 
 ## Running the tests ⚡
 ```bash
@@ -104,7 +104,7 @@ When you run the tests, a new folder is generated inside the `cypress` folder (`
 ```
 
 ```bash
-# To execute the Artillery tests, run the following command:
+# Before to run the Artillery tests, create a performanceResults folder, at root level of your project, and then run the following command:
 > npm run artillery:test
 ```
 
