@@ -31,4 +31,5 @@ jobs:
     - name: Performance tests
       uses: kenju/github-actions-artillery@master
       with:
-        filepath: performanceTests/performance.yml
+        # filepath: performanceTests/performance.yml
+        start: npm run artillery:test
