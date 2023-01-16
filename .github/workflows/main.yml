@@ -22,14 +22,8 @@ jobs:
   artillery:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: Writing .env file
-      run: |
-        echo '${{ secrets.PLAYWRIGHT_ENV_CI }}' > .env
-    - name: Install dependencies
-      run: npm ci
-    - name: Performance tests
-      uses: kenju/github-actions-artillery@master
-      with:
-        # filepath: performanceTests/performance.yml
-        start: npm run artillery:test
+      - uses: actions/checkout@master
+      - name: Performance tests
+        uses: kenju/github-actions-artillery@master
+        with:
+          filepath: performanceTests/performance.yml
