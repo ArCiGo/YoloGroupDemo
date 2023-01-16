@@ -1,5 +1,5 @@
 config:
-  target: "{{ $processEnvironment.BASE_URL_TARGET }}"
+  target: "<YourAmazingURL"
   plugins:
     expect: {}
   phases:
