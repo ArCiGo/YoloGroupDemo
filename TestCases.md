@@ -4,7 +4,7 @@ Some functional and non-functional test cases for Yolo Group assessment.
 
 ## Assumptions 🤔
 
-* API testing should be performed.
+* API testing should be performed (functional and non-functional).
 * As the assessment says, this project uses a mock server. Once the Development team develops the ExBanking services, and is ready to use, the tests will be updated with the right URL and endpoints. If needed the requests and responses might be updated.
 
 ## Endpoint's formats
@@ -145,7 +145,7 @@ Some functional and non-functional test cases for Yolo Group assessment.
 
 ## Test scenarios 💻
 
-Functional testing
+**Functional testing**
 
 ```gherkin
 Feature: ExBanking API demo flow
@@ -311,3 +311,43 @@ Scenario outline: Attempt to send money using an account without funds
 ```
 
 For demo purposes, the following functional test cases are going to be automated: **TC1, TC2, TC3, TC4, TC6, TC8, TC10, TC12**.
+
+**Non-Functional testing**
+
+```gherking
+#TC15. The service must support a number n of users in a specific time n
+Scenario outline: Get all users endpoint should support n users in n seconds.
+    Given the folowing endpoint {{url}}/users (GET), with "<users>" sent simultaneously in "<seconds>" seconds
+    When I send it
+    Then the application load time should not exceed 10 seconds
+
+    Examples:
+    | users     | seconds   |
+    | 10        | 10        |
+    | 100       | 100       |
+    | 1000      | 150       |
+    | 10000     | 200       |
+    | 100000    | 300       |
+
+#TC16. The service should be installable in any cloud service
+Scenario: Install the ExBanking Service on AWS
+    Given the ExBanking installation package
+    When I install it on AWS
+    Then it should be installed properly, without problems, and should work.
+
+#TC17. The service messages should be translated into any language
+Scenario outline: Change the language of the service
+    Given the ExBanking service is used in "<language>"
+    Then I should be able to see all the messages translated in the language I set
+
+    Examples:
+    | language      |
+    | español       |
+    | english       |
+    | français      |
+    | Ελληνική      |
+    | український   |
+    | 芝诺           |
+```
+
+For demo purposes, the following functional test cases are going to be automated: **TC15**.
