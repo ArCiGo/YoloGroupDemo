@@ -1,13 +1,9 @@
 describe('ExBanking mock server API tests', () => {
 
-    beforeEach(() => {
-        cy.visit(Cypress.env('baseURL'));
-    });
-    
     // TC1
     it('should post a user successfully', () => {
         cy.fixture('requests/usersPostRequest').then((bodyRequest) => {
-            cy.request('POST', '/users', { bodyRequest }).then((response) => {
+            cy.request('POST', Cypress.env('baseUrl') + '/users', { bodyRequest }).then((response) => {
                 expect(response.isOkStatusCode).to.be.true;
                 expect(response.status).to.be.eq(200);
                 cy.fixture('responses/usersPostResponse').should('deep.equal', response.body);
@@ -31,7 +27,7 @@ describe('ExBanking mock server API tests', () => {
         cy.fixture('requests/usersPostRequest').then((bodyRequest) => {
             cy.request({
                 method: 'POST',
-                url: '/users/existing',
+                url: Cypress.env('baseUrl') + '/users/existing',
                 body: bodyRequest,
                 failOnStatusCode: false
             }).then((response) => {
@@ -45,7 +41,7 @@ describe('ExBanking mock server API tests', () => {
 
     // TC3
     it('should get all the users registered in the service', () => {
-        cy.request('GET', '/users').then((response) => {
+        cy.request('GET', Cypress.env('baseUrl') + '/users').then((response) => {
             expect(response.isOkStatusCode).to.be.true;
             expect(response.status).to.be.eq(200);
             cy.fixture('responses/usersGetResponse').should('deep.equal', response.body);
@@ -53,8 +49,8 @@ describe('ExBanking mock server API tests', () => {
     });
 
     // TC4
-    it('should get a specific user registered in the service', () => {
-        cy.request('GET', '/users/' + this.CURP).then((response) => {
+    it('should get a specific user registered in the service', function() {
+        cy.request('GET', Cypress.env('baseUrl') + '/users/' + this.CURP).then((response) => {
             expect(response.isOkStatusCode).to.be.true;
             expect(response.status).to.be.eq(200);
             cy.fixture('responses/usersGetResponse').then((user) => {
@@ -66,7 +62,7 @@ describe('ExBanking mock server API tests', () => {
     // TC6
     it('should deposit money successfully to an existing account', () => {
         cy.fixture('requests/depositsPostRequest').then((bodyRequest) => {
-            cy.request('POST', '/deposits', { bodyRequest }).then((response) => {
+            cy.request('POST', Cypress.env('baseUrl') + '/deposits', { bodyRequest }).then((response) => {
                 expect(response.isOkStatusCode).to.be.true;
                 expect(response.status).to.be.eq(200);
                 cy.fixture('responses/depositsPostResponse').should('deep.equal', response.body);
@@ -77,7 +73,7 @@ describe('ExBanking mock server API tests', () => {
     // TC8
     it('should withdraw money successfully from an existing account', () => {
         cy.fixture('requests/withdrawalsPostRequest').then((bodyRequest) => {
-            cy.request('POST', '/withdrawals', { bodyRequest }).then((response) => {
+            cy.request('POST', Cypress.env('baseUrl') + '/withdrawals', { bodyRequest }).then((response) => {
                 expect(response.isOkStatusCode).to.be.true;
                 expect(response.status).to.be.eq(200);
                 cy.fixture('responses/withdrawalsPostResponse').should('deep.equal', response.body);
@@ -86,8 +82,8 @@ describe('ExBanking mock server API tests', () => {
     });
 
     // TC10
-    it('should get a balance of an existing account', () => {
-        cy.request('GET', '/balance/' + this.account).then((response) => {
+    it('should get a balance of an existing account', function() {
+        cy.request('GET', Cypress.env('baseUrl') + '/balance/' + this.account).then((response) => {
             expect(response.isOkStatusCode).to.be.true;
             expect(response.status).to.be.eq(200);
             cy.fixture('responses/balanceGetResponse').should('deep.equal', response.body);
@@ -97,7 +93,7 @@ describe('ExBanking mock server API tests', () => {
     // TC12
     it('should transfer money successfully to an existing account', () => {
         cy.fixture('requests/transfersPostRequest').then((bodyRequest) => {
-            cy.request('POST', '/transfers', { bodyRequest }).then((response) => {
+            cy.request('POST', Cypress.env('baseUrl') + '/transfers', { bodyRequest }).then((response) => {
                 expect(response.isOkStatusCode).to.be.true;
                 expect(response.status).to.be.eq(200);
                 cy.fixture('responses/transfersPostResponse').should('deep.equal', response.body)

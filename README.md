@@ -79,7 +79,7 @@ Open your favorite terminal (or you can use the terminal provided by Visual Stud
 
 [![Import environment collection](/Img02_Postman.png)](https://user-images.githubusercontent.com/32103862/212745567-2ce1091e-dcda-478a-987f-ec3ccf354a7f.mp4)
 
-5. Now it is time to create a mock server to run everything. Just remember to use the existing collection you already imported. Once the mock server is created, copy the URL and paste it in the *URL* variable located in the **ExBanking** environment (do a double check to verify if the URL is correct). Now, you are able to execute the scripts in Postman! (click on image to see the video).
+5. Now it is time to create a mock server to run everything. Just remember to use the existing collection you already imported. Once the mock server is created, copy the URL and paste it in the *URL* variable located in the **ExBanking** environment (do a double check to verify if the URL is correct. Paste the URL in the **Initial Value** and **Current Value** fields). Now, you are able to execute the scripts in Postman! (click on image to see the video).
 
 [![Create mock server](/Img03_Postman.png)](https://user-images.githubusercontent.com/32103862/212745560-1a4317d6-0698-46d6-b287-ea570f88778c.mp4)
 
