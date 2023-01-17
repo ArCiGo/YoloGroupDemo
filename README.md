@@ -4,7 +4,7 @@ A technical assessment for the **Software Engineer in Test** position.
 
 ## The project 💻
 
-The following project was made using **TS, Cypress, Artillery, Postman**. Review [here](ExBanking_for_test_assignment_(1).pdf) the assessment proposed. Here is the [test plan](TestCases.md)!
+The following project was made using **TS, Cypress, Artillery and Postman**. Review [here](ExBanking_for_test_assignment_(1).pdf) the assessment proposed. Here is the [test plan](TestCases.md)!
 
 Do you want to create a UI framework based on this project? Check this [branch](https://github.com/ArCiGo/TS-Automation-Framework/tree/master)!
 
@@ -15,8 +15,6 @@ Do you want to create a UI framework based on this project? Check this [branch](
 * *Cypress v10.3.1*.
 * *cypress-mochawesome-reporter v3.2.0*.
 * *Postman v10.7.3*.
-* *GitHub Actions*.
-* *Docker*.
 
 ## Main project structure 🗂️
 
@@ -79,13 +77,19 @@ Open your favorite terminal (or you can use the terminal provided by Visual Stud
 
 4. Now import the environment (`ExBanking.postman_environment.json`) located in the `postman` folder (click on image to see the video).
 
-[![Import environment collection](/Img02_Postman.png)](https://user-images.githubusercontent.com/32103862/212745567-2ce1091e-dcda-478a-987f-ec3ccf354a7f.mp4).
+[![Import environment collection](/Img02_Postman.png)](https://user-images.githubusercontent.com/32103862/212745567-2ce1091e-dcda-478a-987f-ec3ccf354a7f.mp4)
 
-5. Now it is time to create a mock server to run everything. Just remember to use the existing collection you already imported. Once the mock server is created, copy the URL and paste it in the URL variable located in the ExBanking environment (do a double check to verify if the URL is correct). Now, you are able to execute the scripts in Postman! (click on image to see the video).
+5. Now it is time to create a mock server to run everything. Just remember to use the existing collection you already imported. Once the mock server is created, copy the URL and paste it in the *URL* variable located in the **ExBanking** environment (do a double check to verify if the URL is correct). Now, you are able to execute the scripts in Postman! (click on image to see the video).
 
-[![Create mock server](/Img03_Postman.png)](https://user-images.githubusercontent.com/32103862/212745560-1a4317d6-0698-46d6-b287-ea570f88778c.mp4).
+[![Create mock server](/Img03_Postman.png)](https://user-images.githubusercontent.com/32103862/212745560-1a4317d6-0698-46d6-b287-ea570f88778c.mp4)
 
-6. Replace the `baseUrl` value, located in the `cypress.config.ts` file (at root level of the project) with the URL of the mock server. Perform the same action for the `target` value located in the `performance.yml` file (`performanceTests` folder) with the URL of the mock server.
+6. There are two enviromental template files for Cypress and Artillery.
+    * Cypress
+        * Remove the `.template` suffix for the `cypress.env.json.template` file (located at root level of the project).
+        * Replace the `baseUrl` value with the URL of the mock server.
+    * Artillery
+        * Remove the Remove the `.template` suffix for the `env.template` file (located at root level of the project).
+        * Replace the `BASE_URL_TARGET` value with the URL of the mock server.
 
 ## Running the tests ⚡
 ```bash
@@ -104,6 +108,8 @@ When you run the tests, a new folder is generated inside the `cypress` folder (`
 # Before to run the Artillery tests, create a performanceResults folder, at root level of the project, and then run the following command:
 > npm run artillery:test
 ```
+
+# Extras! 💥
 
 ## Docker 🐋
 
@@ -134,5 +140,5 @@ If you want to execute the Cypress tests using Docker, you can do the following 
 
 ## To consider 👀
 
-* As the assessment says, this project uses a mock server. Once the Development team develops the **ExBanking** services, and is ready to use, the tests will be updated with the right URL and endpoints. If needed the requests and responses might be updated.
+* As the assessment says, this project uses a mock server. Once the Development team develops the **ExBanking** services, and is ready to use, the tests will be updated with the right URL and endpoints. If needed, the requests and responses might be updated.
 * Postman has a limitation with the Mock Servers feature. For a free user there is a limit of 1,000 calls per month. For the rest of the users (pay), 10,000 calls per month. Take this into consideration at the moment of running the tests.
