@@ -5,7 +5,7 @@ Some functional and non-functional test cases for Yolo Group assessment.
 ## Assumptions 🤔
 
 * API testing should be performed (functional and non-functional).
-* As the assessment says, this project uses a mock server. Once the Development team develops the ExBanking services, and is ready to use, the tests will be updated with the right URL and endpoints. If needed the requests and responses might be updated.
+* As the assessment says, this project uses a mock server. Once the Development team develops the ExBanking services, and is ready to use, the tests will be updated with the right URL and endpoints. If needed, the requests and responses might be updated.
 
 ## Endpoint's formats
 
@@ -237,7 +237,7 @@ Scenario outline: Attempt to withdraw money from an account without funds
     Given the following body request values "<account>" and "<ammount>", where the account does not have funds, for the {{url}}/withdrawals endpoint (POST)
     When I send it
     Then the service should return a message telling me that the operation was not performed due to the account does not have funds
-    And the status code should be 400
+    And the status code should be 422
 
     Examples:
     | account           | ammount   |
@@ -280,30 +280,30 @@ Scenario outline: Send money to an existing account
 Scenario outline: Attempt to send money to an non-existing account
     Given the following body requests values "<account>", "<ammount>", "<destination>" and "<concept>", where the account does not exist, for the {{url}}/transfers endpoint (POST)
     When I send it
-    Then the service should return a message telling me that account does not exist
+    Then the service should return a message telling me that the destination account does not exist
     And the status code should be 404
 
     Examples:
     | account           | ammount   | destination       | concept                       |
-    | 6391083442041505  | 45.00     | 5434804060114097  | "Doing an amazing transfer!"  |
+    | 6391083442041505  | 45.00     | 0434222260114333  | "Doing an amazing transfer!"  |
 
 # TC14. As a tester I should not be able to send money if the ammount is less than or equal to $0.00
 Scenario outline: Attempt to send $0.00
     Given the following body requests values "<account>", "<ammount>", "<destination>" and "<concept>", for the {{url}}/transfers endpoint (POST)
     When I send it
     Then the service should return a message telling me that the ammount should be greater than $0.00
-    And the status code should be 400
+    And the status code should be 422
 
     Examples:
     | account           | ammount   | destination       | concept                       |
     | 6391083442041505  | 0.00      | 5434804060114097  | "Doing an amazing transfer!"  |
 
-# TC14. As a tester I should not be able to send money if I do not have funds in the account
+# TC15. As a tester I should not be able to send money if I do not have funds in the account
 Scenario outline: Attempt to send money using an account without funds
     Given the following body requests values "<account>", "<ammount>", "<destination>" and "<concept>", for the {{url}}/transfers endpoint (POST)
     When I send it
-    Then the service should return a message telling me that the account does not have funds
-    And the status code should be 400
+    Then the service should return a message telling me that the sender account does not have funds
+    And the status code should be 422
 
     Examples:
     | account           | ammount   | destination       | concept                       |
@@ -314,12 +314,12 @@ For demo purposes, the following functional test cases are going to be automated
 
 **Non-Functional testing**
 
-```gherking
-#TC15. The service must support a number n of users in a specific time n
+```gherkin
+#TC16. The service must support a n number of users in a specific time n
 Scenario outline: Get all users endpoint should support n users in n seconds.
     Given the folowing endpoint {{url}}/users (GET), with "<users>" sent simultaneously in "<seconds>" seconds
     When I send it
-    Then the application load time should not exceed 10 seconds
+    Then the application load time should not exceed the "<seconds>" of seconds
 
     Examples:
     | users     | seconds   |
@@ -335,10 +335,10 @@ Scenario: Install the ExBanking Service on AWS
     When I install it on AWS
     Then it should be installed properly, without problems, and should work.
 
-#TC17. The service messages should be translated into any language
+#TC18. The service messages should be translated into any language
 Scenario outline: Change the language of the service
     Given the ExBanking service is used in "<language>"
-    Then I should be able to see all the messages translated in the language I set
+    Then I should be able to see all the application translated in the language I set
 
     Examples:
     | language      |
@@ -350,4 +350,4 @@ Scenario outline: Change the language of the service
     | 芝诺           |
 ```
 
-For demo purposes, the following functional test cases are going to be automated: **TC15**.
+For demo purposes, the following functional test cases are going to be automated: **TC16**.

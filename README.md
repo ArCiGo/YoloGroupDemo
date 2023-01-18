@@ -45,7 +45,6 @@ Do you want to create a UI framework based on this project? Check this [branch](
 │   │   ├── e2e.ts
 │   │   └── index.ts
 │   └── tsconfig.json
-├── performanceResults
 └── performanceTests/
     └── performance.yml
 ```
