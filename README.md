@@ -112,11 +112,12 @@ When you run the tests, a new folder is generated inside the `cypress` folder (`
 
 ## Docker 🐋
 
-If you want to execute the Cypress tests using Docker, you can do the following in your terminal at the workspace project.-
+If you want to execute the tests using Docker, you can do the following in your terminal at the workspace project.-
 
 ```bash
 # Without a Dockerfile
 
+# Cypress
 # Pull the Cypress Docker image you need to run the tests. You can use the latest one
 > docker pull cypress/included:9.4.1
 
@@ -125,10 +126,17 @@ If you want to execute the Cypress tests using Docker, you can do the following 
 
 # Then, execute the following command to run the tests inside of the container
 > docker run -it -v $(pwd):/e2e -w /e2e cypress/included:9.4.1 --spec cypress/e2e --browser electron
+
+# Artillery
+# Pull the Artillery Docker image you need to run the tests. You can use the latest one
+> artilleryio/artillery:latest
+
+# Execute the following command to run the tests inside of the container
+> docker run --platform linux/amd64 -it --rm -e BASE_URL_TARGET=<YourAwesomeURL> -v ${PWD}:/performanceTests artilleryio/artillery:latest run /performanceTests/performanceTests/performance.yml
 ```
 
 ```bash
-# With a Dockerfile
+# With a Dockerfile. Just Cypress
 
 # Execute the following command to compile the file. <YourVersionTag> may be any value you want
 > docker build -t my-cypress-image:<YourVersionTag> .

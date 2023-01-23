@@ -21,9 +21,11 @@ jobs:
           start: npm run cypress:open:cli
   artillery:
     runs-on: ubuntu-latest
+    container: artilleryio/artillery:latest
     steps:
-      - uses: actions/checkout@master
-      - name: Performance tests
-        uses: kenju/github-actions-artillery@master
-        with:
-          filepath: performanceTests/performance.yml
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Execute load tests
+        env:
+          BASE_URL_TARGET: "${{ secrets.BASE_URL_TARGET }}"
+        run: /home/node/artillery/bin/run run performanceTests/performance.yml
