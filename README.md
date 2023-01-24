@@ -136,13 +136,21 @@ If you want to execute the tests using Docker, you can do the following in your 
 ```
 
 ```bash
-# With a Dockerfile. Just Cypress
+# With a Dockerfile. 
 
+# Cypress
 # Execute the following command to compile the file. <YourVersionTag> may be any value you want
-> docker build -t my-cypress-image:<YourVersionTag> .
+> docker build -f Dockerfile.Cypress -t my-cypress-image:<YourVersionTag> .
 
 # Then, execute the following command to run the tests inside of the container
-> docker run -i -v $(pwd):/my-cypress-project -t my-cypress-image:<YourVersionTag> --spec cypress/e2e
+> docker run -i -v $(pwd):/my-tests -t my-cypress-image:<YourVersionTag> --spec cypress/e2e
+
+# Artillery
+# Execute the following command to compile the file. <YourVersionTag> may be any value you want
+> docker build -f Dockerfile.Artillery -t my-artillery-image:<YourVersionTag> .
+
+# Then, execute the following command to run the tests inside of the container
+> docker run --platform linux/amd64 -i -v $(pwd):/my-tests -t my-artillery-image:<YourVersionTag>
 ```
 
 ## To consider 👀

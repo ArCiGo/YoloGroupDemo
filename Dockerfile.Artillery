@@ -1,0 +1,23 @@
+FROM artilleryio/artillery:latest
+
+# Create the folder where our project will be stored
+RUN mkdir /my-tests
+RUN mkdir /performanceResults
+
+# We make it our work-directory
+WORKDIR /my-tests
+COPY /performanceResults .
+
+# Let's copy the essential files that we must use to run our scripts. Right value means the destination
+COPY ./package.json .
+COPY ./package-lock.json .
+COPY ./performanceTests ./performanceTests 
+COPY ./.env .
+
+# Install the Cypress dependencies in the work directory
+# `RUN npm install` was causing a problem at the moment to execute the dockerfile: 'No version of Cypress is installed in: /root/.cache/Cypress/10.3.1/Cypress'
+# To solve that, I copied the `package-lock.json .` and I changed to the following command:
+RUN npm ci
+RUN npm install concurrently
+
+ENTRYPOINT ["npx", "concurrently", "npm:artillery:test"]
